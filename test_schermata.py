@@ -1,5 +1,11 @@
 import tkinter as tk
 from tkinter import simpledialog
+import RPi.GPIO as gpio
+import time
+
+gpio.setwarnings(False)
+gpio.setmode(gpio.BOARD)
+gpio.setup(10, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 
 PASSWORD_CORRETTA = "segreta"  # Imposta la tua password qui
 
@@ -50,5 +56,11 @@ stop_button.pack(side=tk.RIGHT, padx=50)
 
 counter = 0
 running = False  # Variabile per tenere traccia dello stato del countdown
+
+
+while True:
+	if gpio.input(10) == gpio.HIGH:
+		print("Button was pushed")
+		break
 
 window.mainloop()
