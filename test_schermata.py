@@ -7,7 +7,8 @@ gpio.setwarnings(False)
 gpio.setmode(gpio.BOARD)
 gpio.setup(10, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 
-PASSWORD_CORRETTA = "password"  # Imposta la tua password qui
+PASSWORD_CORRETTA = "password"
+timer_stopped = False
 
 def start_countdown():
     global counter, running
@@ -16,27 +17,29 @@ def start_countdown():
     update_label()
 
 def update_label():
-    global counter
-    if counter > 0 and running:
+    global counter, time_stopped
+    if counter > 0 and running and not timer_stopped:
         minutes, seconds = divmod(counter, 60)
         label.config(text=f"{minutes:02d}:{seconds:02d}")
         counter -= 1
         window.after(1000, update_label)
-    elif not running:
+    elif not running and not timer_stopped:
         label.config(text=counter)
-    else:
-        label.config(text=str(counter))
+    elif timer_stopped:
+        minutes, seconds = divmod(counter, 60)
+        label.config(text=f"{minutes:02d}:{seconds:02d}")
 
 def stop_countdown():
     global running
     verifica_password()
+    if not running:
+        minutes, seconds = divmod(counter, 60)
+        label.config(text=f"{minutes:02d}:{seconds:02d}")
 
 def verifica_password():
     password = simpledialog.askstring("Password", "Inserisci la password:", parent=window, show='*')
     if password == PASSWORD_CORRETTA:
-        global counter
         global running
-        counter = counter
         running = False
     else:
         label.config(text="Password Errata")
