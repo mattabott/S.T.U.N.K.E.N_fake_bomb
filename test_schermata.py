@@ -2,18 +2,28 @@ import tkinter as tk
 from tkinter import simpledialog
 import RPi.GPIO as gpio
 import time
+import pygame
 
 gpio.setwarnings(False)
 gpio.setmode(gpio.BOARD)
 gpio.setup(10, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 
+pygame.mixer.init()
+pygame.mixer.music.load("sirena.mp3")
+
+
 PASSWORD_CORRETTA = "password"
 timer_stopped = False
+
+def display_time():
+    minutes, seconds = divmod(counter, 60)
+    label.config(text=f"{minutes:02d}:{seconds:02d}")
 
 def start_countdown():
     global counter, running
     counter = 600  # Durata del countdown in secondi
     running = True
+    pygame.mixer.music.play(-1)
     update_label()
 
 def update_label():
@@ -24,23 +34,22 @@ def update_label():
         counter -= 1
         window.after(1000, update_label)
     elif not running and not timer_stopped:
-        label.config(text=counter)
+        display_time()
     elif timer_stopped:
-        minutes, seconds = divmod(counter, 60)
-        label.config(text=f"{minutes:02d}:{seconds:02d}")
+        display_time()
 
 def stop_countdown():
     global running
     verifica_password()
-    if not running:
-        minutes, seconds = divmod(counter, 60)
-        label.config(text=f"{minutes:02d}:{seconds:02d}")
 
 def verifica_password():
     password = simpledialog.askstring("Password", "Inserisci la password:", parent=window, show='*')
     if password == PASSWORD_CORRETTA:
         global running
         running = False
+        timer_stopped = True
+        pygame.mixer.music.stop()
+        display_time()
     else:
         label.config(text="Password Errata")
 
