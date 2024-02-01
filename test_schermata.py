@@ -9,6 +9,9 @@ gpio.setwarnings(False)
 gpio.setmode(gpio.BOARD)
 gpio.setup(10, gpio.IN, pull_up_down=gpio.PUD_DOWN)
 gpio.setup(11, gpio.OUT)
+gpio.setup(40, gpio.OUT)
+
+gpio.output(40, gpio.LOW)
 
 p = gpio.PWM(11, 50)
 p.start(0)
@@ -93,7 +96,9 @@ def move_servo(target_duty_cycle, duration, steps=100):
     time.sleep(0.2)
     counter -= 4
     p.stop()
-    gpio.cleanup()
+    #gpio.cleanup()
+    #led verde acceso
+    gpio.output(40, gpio.HIGH)
 
 def save_documents():
     move_servo(12, 3)
@@ -126,14 +131,9 @@ counter = 0
 running = False
 timer_stopped = False  # Inizializza timer_stopped a False
 
-# Chiamata alla funzione resize_elements() ogni volta che la finestra cambia dimensione
-#window.bind("<Configure>", resize_elements)
-
 while True:
     if gpio.input(10) == gpio.HIGH:
-        print("Button was pushed")
         break
 
 start_countdown()
 window.mainloop()
-
