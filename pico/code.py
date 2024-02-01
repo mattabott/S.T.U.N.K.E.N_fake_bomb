@@ -23,7 +23,7 @@ kbd.release_all()
 
 time.sleep(1)
 
-keyboard_layout.write("cd /home/mattabott/Documents/GDI/STUNKEN")
+keyboard_layout.write("cd /home/mattabott/Documents/G/D/I/S.T.U.N.K.E.N_fake_bomb")
 kbd.press(Keycode.ENTER)
 kbd.release_all()
 time.sleep(0.5)
