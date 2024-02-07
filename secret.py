@@ -38,8 +38,17 @@ def fake_download():
     
     print_colored("\nOra puoi scollegare l'Hard Disk in sicurezza\n\n", GREEN)
     
-    time.sleep(2)
+    time.sleep(1)
+    
+    print('''  _    _____  _____          _____  _____          _ 
+ | |  / ____|/ ____|   /\   |  __ \|  __ \ /\     | |
+ | | | (___ | |       /  \  | |__) | |__) /  \    | |
+ | |  \___ \| |      / /\ \ |  ___/|  ___/ /\ \   | |
+ |_|  ____) | |____ / ____ \| |    | |  / ____ \  |_|
+ (_) |_____/ \_____/_/    \_\_|    |_| /_/    \_\ (_)
+                                                     ''')
 
 if __name__ == "__main__":
     fake_download()
+
 
