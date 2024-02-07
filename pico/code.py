@@ -22,6 +22,8 @@ green.direction = digitalio.Direction.OUTPUT
 btn = digitalio.DigitalInOut(board.GP16)
 btn.switch_to_input(pull=digitalio.Pull.UP)
 
+sleep_time = 10
+
 def btn_on():
     if btn.value == False:
         green.value = True
@@ -56,9 +58,11 @@ def execute_commands(sleep_time):
         kbd.press(Keycode.ENTER)
         kbd.release_all()
         
-        for i in range(sleep_time*4):
-            time.sleep(i/4)
+        for i in range(sleep_time*2):
+            time.sleep(0.5)
             check_on()
+
+        print('finish')
         
     except ButtonReleasedException:
         print("Pulsante rilasciato durante l'esecuzione dei comandi")
@@ -70,7 +74,15 @@ def execute_commands(sleep_time):
 try:
     while True:
         if btn_on():
-            execute_commands(5)
+            execute_commands(sleep_time)cd /home/mattabott/Documents/G/D/I/S.T.U.N.K.E.N_fake_bomb
+            
+            
+            while True:
+                if btn.value == False:
+                    continue
+                else:
+                    break
+            
 
         time.sleep(0.1)
 except Exception as e:
