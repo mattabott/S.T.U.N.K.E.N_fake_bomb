@@ -36,7 +36,7 @@ def btn_on():
 
 def check_on():
     if not btn_on():
-        kbd.press(Keycode.LEFT_CONTROL, Keycode.LEFT_SHIFT, Keycode.W)
+        kbd.press(Keycode.LEFT_CONTROL, Keycode.C)
         time.sleep(0.1)
         kbd.release_all()
         raise ButtonReleasedException
@@ -74,7 +74,7 @@ def execute_commands(sleep_time):
 try:
     while True:
         if btn_on():
-            execute_commands(sleep_time)cd /home/mattabott/Documents/G/D/I/S.T.U.N.K.E.N_fake_bomb
+            execute_commands(sleep_time)
             
             
             while True:
@@ -87,4 +87,5 @@ try:
         time.sleep(0.1)
 except Exception as e:
     print(f"Errore: {e}")
+
 
