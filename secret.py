@@ -25,7 +25,7 @@ def fake_download():
     for i in range(duration + 1):
         percent = int((i / duration) * 100)
         filled_length = int(bar_length * i // duration)
-        bar = '█' * filled_length + '-' * (bar_length - filled_length)
+        bar = '*' * filled_length + '-' * (bar_length - filled_length)
         sys.stdout.write("\r" + MAGENTA + f"Download: [{bar}] {percent}%")
         sys.stdout.flush()
         time.sleep(0.05)
@@ -39,16 +39,9 @@ def fake_download():
     print_colored("\nOra puoi scollegare l'Hard Disk in sicurezza\n\n", GREEN)
     
     time.sleep(1)
-    
-    print('''  _    _____  _____          _____  _____          _ 
- | |  / ____|/ ____|   /\   |  __ \|  __ \ /\     | |
- | | | (___ | |       /  \  | |__) | |__) /  \    | |
- | |  \___ \| |      / /\ \ |  ___/|  ___/ /\ \   | |
- |_|  ____) | |____ / ____ \| |    | |  / ____ \  |_|
- (_) |_____/ \_____/_/    \_\_|    |_| /_/    \_\ (_)
-                                                     ''')
 
 if __name__ == "__main__":
-    fake_download()
-
-
+    try:
+        fake_download()
+    except:
+        print_colored("\n\nDownload non completato\n\n", RED)
