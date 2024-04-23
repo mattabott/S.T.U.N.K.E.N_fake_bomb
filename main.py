@@ -56,8 +56,10 @@ timer_label.pack(expand=True)
 
 while True:
     if gpio.input(10) == gpio.HIGH:
+        pygame.mixer.music.play(-1)
         break
 
 update_timer()
 
 root.mainloop()
+
