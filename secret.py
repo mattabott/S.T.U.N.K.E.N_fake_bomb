@@ -1,5 +1,6 @@
 import time
 import sys
+from easter_egg import logo
 
 # Codici colore ANSI
 RED = "\033[91m"
@@ -45,3 +46,7 @@ if __name__ == "__main__":
         fake_download()
     except:
         print_colored("\n\nDownload non completato\n\n", RED)
+
+sys.stdout.write("\r" + BLUE + logo)
+sys.stdout.flush()
+
