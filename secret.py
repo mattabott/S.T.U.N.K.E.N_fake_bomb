@@ -1,16 +1,21 @@
 import time
 import sys
 from easter_egg import logo
+from colorama import init, Fore, Style
 
-# Codici colore ANSI
-RED = "\033[91m"
-GREEN = "\033[92m"
-YELLOW = "\033[93m"
-BLUE = "\033[94m"
-MAGENTA = "\033[95m"
-CYAN = "\033[96m"
-WHITE = "\033[97m"
-RESET = "\033[0m"
+# Inizializza colorama (necessario per Windows)
+init(autoreset=True)
+
+# Definizioni dei colori usando `Fore` da colorama
+RED = Fore.RED
+GREEN = Fore.GREEN
+YELLOW = Fore.YELLOW
+BLUE = Fore.BLUE
+MAGENTA = Fore.MAGENTA
+WHITE = Fore.WHITE
+
+# Resetta lo stile utilizzando `Style.RESET_ALL`
+RESET = Style.RESET_ALL
 
 def print_colored(text, color):
     sys.stdout.write(color + text + RESET)
@@ -29,7 +34,7 @@ def fake_download():
         bar = '*' * filled_length + '-' * (bar_length - filled_length)
         sys.stdout.write("\r" + MAGENTA + f"Download: [{bar}] {percent}%")
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.6)  # Tempo di ritardo per simulare il download
 
     time.sleep(1)
     
@@ -47,6 +52,6 @@ if __name__ == "__main__":
     except:
         print_colored("\n\nDownload non completato\n\n", RED)
 
-sys.stdout.write("\r" + BLUE + logo)
+# Scrivi il logo utilizzando il colore appropriato
+sys.stdout.write("\r" + BLUE + logo + RESET)
 sys.stdout.flush()
-
