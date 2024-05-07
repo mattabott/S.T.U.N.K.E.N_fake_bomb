@@ -22,7 +22,7 @@ green.direction = digitalio.Direction.OUTPUT
 btn = digitalio.DigitalInOut(board.GP16)
 btn.switch_to_input(pull=digitalio.Pull.UP)
 
-sleep_time = 10
+sleep_time = 60
 
 def btn_on():
     if btn.value == False:
@@ -46,14 +46,14 @@ def execute_commands(sleep_time):
         kbd.press(Keycode.R, Keycode.GUI)
         time.sleep(0.3)
         kbd.release_all()
-        keyboard_layout.write("powershell")
+        keyboard_layout.write("cmd")
         time.sleep(0.1)
         kbd.press(Keycode.ENTER)
         kbd.release_all()
         time.sleep(1)
         check_on()
         
-        keyboard_layout.write("cd Documents\GDI\\'torneo STUNKEN'\S.T.U.N.K.E.N_fake_bomb-main\S.T.U.N.K.E.N_fake_bomb-main")
+        keyboard_layout.write("cd Documenti\GDI\Torneo_STUNKEN\S.T.U.N.K.E.N_fake_bomb-main\S.T.U.N.K.E.N_fake_bomb-main")
         kbd.press(Keycode.ENTER)
         kbd.release_all()
         time.sleep(0.5)
@@ -62,9 +62,12 @@ def execute_commands(sleep_time):
         kbd.press(Keycode.ENTER)
         kbd.release_all()
         
-        for i in range(sleep_time*2):
-            time.sleep(0.5)
+        for i in range(sleep_time):
             check_on()
+            green.value = True
+            time.sleep(0.5)
+            green.value = False
+            time.sleep(0.5)
 
         print('finish')
         
